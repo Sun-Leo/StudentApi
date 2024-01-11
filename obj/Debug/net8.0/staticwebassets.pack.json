@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Gizem\\Desktop\\vsstudent\\StudentApi\\wwwroot\\custom.css",
+      "PackagePath": "staticwebassets\\custom.css"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.StudentApi.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.StudentApi.props",
+      "PackagePath": "build\\StudentApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.StudentApi.props",
+      "PackagePath": "buildMultiTargeting\\StudentApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.StudentApi.props",
+      "PackagePath": "buildTransitive\\StudentApi.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

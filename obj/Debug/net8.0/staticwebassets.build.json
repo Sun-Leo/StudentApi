@@ -1,0 +1,39 @@
+{
+  "Version": 1,
+  "Hash": "V2zSGyg2muliH+r6WdccIbxaJP+91eICdFsx2WuJU0M=",
+  "Source": "StudentApi",
+  "BasePath": "_content/StudentApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "StudentApi\\wwwroot",
+      "Source": "StudentApi",
+      "ContentRoot": "C:\\Users\\Gizem\\Desktop\\vsstudent\\StudentApi\\wwwroot\\",
+      "BasePath": "_content/StudentApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Gizem\\Desktop\\vsstudent\\StudentApi\\wwwroot\\custom.css",
+      "SourceId": "StudentApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Gizem\\Desktop\\vsstudent\\StudentApi\\wwwroot\\",
+      "BasePath": "_content/StudentApi",
+      "RelativePath": "custom.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\custom.css"
+    }
+  ]
+}

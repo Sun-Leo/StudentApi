@@ -1,0 +1,18 @@
+public class AuthenticationService
+{
+    private Dictionary<string, string> users = new Dictionary<string, string>
+    {
+        { "gizem", "password123" }
+    };
+
+    public bool ValidateCredentials(string username, string password)
+    {
+        
+        if (users.TryGetValue(username, out var expectedPassword))
+        {
+            return expectedPassword == password;
+        }
+
+        return false;
+    }
+}

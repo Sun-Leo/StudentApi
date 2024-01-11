@@ -1,0 +1,23 @@
+.swagger-ui .topbar {
+    display: block;
+}
+
+.swagger-ui .topbar .download-url-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.swagger-ui .topbar .download-url-wrapper pre {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.swagger-ui .authorize__btn {
+    display: none;
+}
+
+.swagger-ui .authorize__btn.is-authorized {
+    display: inline-block;
+}
