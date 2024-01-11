@@ -38,7 +38,10 @@ builder.Services.AddSwaggerGen(c =>
     };
     c.AddSecurityRequirement(securityRequirement);
 });
-builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddDbContext<AppDbContext>(option=>
+{
+option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 builder.Services.AddSingleton<AuthenticationService>();
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
@@ -74,6 +77,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
+
 app.MapPost("/login", (string username, string password, [FromServices] AuthenticationService authService) =>
 {
     // Replace this with your authentication logic
@@ -102,56 +106,53 @@ app.MapPost("/login", (string username, string password, [FromServices] Authenti
 .WithOpenApi();
 
 
-app.MapPost("/student", (  Student student) =>
+app.MapPost("/student", ( HttpContext context, AppDbContext dbContext, Student student) =>
 {
-    var context= new AppDbContext();
-   var newstudent= context?.Students?.Add(student);
-   context?.SaveChanges();
+    
+   var newstudent= dbContext?.Students?.Add(student);
+   dbContext?.SaveChangesAsync();
    return newstudent?.Entity;
 })
 .WithName("AddStudent")
 .WithOpenApi();
 
 
-app.MapPost("/lesson", ( Lesson lesson) =>
+
+app.MapPost("/lesson",  (HttpContext context, AppDbContext dbContext ,Lesson lesson) =>
 {
-    var context= new AppDbContext();
-   var newlesson= context?.Lessons?.Add(lesson);
-   context?.SaveChanges();
+   var newlesson= dbContext?.Lessons?.Add(lesson);
+   dbContext?.SaveChanges();
    return newlesson?.Entity;
 })
 .WithName("AddLesson")
 .WithOpenApi();
 
-app.MapPut("/updatestudent", ( Student student) =>
+app.MapPut("/updatestudent", (HttpContext context, AppDbContext dbContext ,Student student) =>
 {
-    var context= new AppDbContext();
-   var newstudent= context?.Students?.Update(student);
-   context?.SaveChanges();
+   var newstudent= dbContext?.Students?.Update(student);
+   dbContext?.SaveChanges();
    return newstudent?.Entity;
 })
 .WithName("UpdateStudent")
 .WithOpenApi();
 
-app.MapPut("/updatelesson", ( Lesson lesson) =>
+app.MapPut("/updatelesson",  ( HttpContext context, AppDbContext dbContext ,Lesson lesson) =>
 {
-    var context= new AppDbContext();
-   var newstudent= context?.Lessons?.Update(lesson);
-   context?.SaveChanges();
+   var newstudent= dbContext?.Lessons?.Update(lesson);
+   dbContext?.SaveChanges();
    return newstudent?.Entity;
 })
 .WithName("UpdateLesson")
 .WithOpenApi();
 
-app.MapDelete("/deletelesson/{lessonId}", ( int lessonId) =>
+app.MapDelete("/deletelesson/{lessonId}",  ( HttpContext context, AppDbContext dbContext ,int lessonId) =>
 {
     
-    var context= new AppDbContext();
-   var deletedlesson= context?.Lessons?.Find(lessonId);
+   var deletedlesson= dbContext?.Lessons?.Find(lessonId);
    if(deletedlesson != null)
    {
-    context?.Lessons?.Remove(deletedlesson);
- context?.SaveChanges();
+    dbContext?.Lessons?.Remove(deletedlesson);
+ dbContext?.SaveChanges();
    return "Ders Silindi";
    }else
    {
@@ -163,20 +164,19 @@ app.MapDelete("/deletelesson/{lessonId}", ( int lessonId) =>
 .WithName("deleteLesson")
 .WithOpenApi();
 
-app.MapDelete("/deletestudent/{studentId}", ( int studentId) =>
+app.MapDelete("/deletestudent/{studentId}",  (HttpContext context, AppDbContext dbContext , int studentId) =>
 {
     
-    var context= new AppDbContext();
-   var deletedstudent= context?.Students?.Find(studentId);
+   var deletedstudent= dbContext?.Students?.Find(studentId);
    if(deletedstudent != null)
    {
-    var relatedLessons = context?.Lessons?.Where(x => x.StudentID == studentId).ToList();
+    var relatedLessons = dbContext?.Lessons?.Where(x => x.StudentID == studentId).ToList();
     if (relatedLessons != null)
             {
                 return "Öğrencinin Ders Kaydı Bulunmaktadır Silinemez";
             }
-    context?.Students?.Remove(deletedstudent);
-    context?.SaveChanges();
+    dbContext?.Students?.Remove(deletedstudent);
+    dbContext?.SaveChanges();
    return "Öğrenci Silindi";
    }
    else
@@ -189,14 +189,13 @@ app.MapDelete("/deletestudent/{studentId}", ( int studentId) =>
 .WithName("deletestudent")
 .WithOpenApi();
 
-app.MapGet("/getstudent", (int page=1, int pageSize=10) =>
+app.MapGet("/getstudent",  (HttpContext context, AppDbContext dbContext ,int page=1, int pageSize=10) =>
 {
-    var context= new AppDbContext();
-    var totalStudents = context?.Students?.Count();
-   var newstudent= context?.Students?.Where(x => x.StudentID >= (page - 1) * pageSize + 1 && x.StudentID <= page * pageSize)
+    var totalStudents = dbContext?.Students?.Count();
+   var newstudent= dbContext?.Students?.Where(x => x.StudentID >= (page - 1) * pageSize + 1 && x.StudentID <= page * pageSize)
         .Include(x => x.Lessons)
         .ToList();
-   context?.SaveChanges();
+   dbContext?.SaveChanges();
     return new
     {
         TotalStudents = totalStudents,
