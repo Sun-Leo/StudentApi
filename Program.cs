@@ -66,7 +66,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(c =>
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Your API V1");
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Student API V1");
     c.RoutePrefix = "swagger";
 
     // SwaggerUI'da token girişi yapabileceğiniz bir alan ekleyin
