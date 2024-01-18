@@ -139,3 +139,4 @@ C:\Users\Gizem\Desktop\vsstudent\StudentApi\bin\Debug\net8.0\AutoMapper.dll
 C:\Users\Gizem\Desktop\vsstudent\StudentApi\bin\Debug\net8.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Gizem\Desktop\vsstudent\StudentApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Gizem\Desktop\vsstudent\StudentApi\bin\Debug\net8.0\StudentApi.staticwebassets.runtime.json
+C:\Users\Gizem\Desktop\vsstudent\StudentApi\obj\Debug\net8.0\StudentApi.sourcelink.json

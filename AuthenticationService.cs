@@ -2,7 +2,7 @@ public class AuthenticationService
 {
     private Dictionary<string, string> users = new Dictionary<string, string>
     {
-        { "gizem", "password123" }
+        { "gizem@g.com", "123456" }
     };
 
     public bool ValidateCredentials(string username, string password)

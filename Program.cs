@@ -57,7 +57,24 @@ builder.Services.AddAuthentication("Bearer")
     });
    builder.Services.AddAuthorization();
 
+   // ConfigureServices metodunda
+builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("CorsPolicy",
+            builder => builder
+                .WithOrigins("http://localhost:5267", "http://localhost:5267/")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowAnyOrigin());
+                
+    });
+
+// Configure metodunda
+
+
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -75,23 +92,30 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+
+
 
 
 
 app.MapPost("/login", (string username, string password, [FromServices] AuthenticationService authService) =>
 {
     // Replace this with your authentication logic
-    var user = new { Username = "gizem", UserId = 123 };
+  var userIsTrue =   authService.ValidateCredentials(username,password);
 
     // Create token
-    var tokenHandler = new JwtSecurityTokenHandler();
+   if  (userIsTrue) {
+     var tokenHandler = new JwtSecurityTokenHandler();
     var key = Encoding.ASCII.GetBytes("studentapigizemgizemapigizemapigizemapi");
     var tokenDescriptor = new SecurityTokenDescriptor
     {
         Subject = new ClaimsIdentity(new Claim[]
         {
-            new Claim(ClaimTypes.Name, user.Username),
-            new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString())
+            new Claim(ClaimTypes.Name, username),
+           
+          
         }),
         Expires = DateTime.UtcNow.AddHours(1), // Token expiration time
         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -101,6 +125,9 @@ app.MapPost("/login", (string username, string password, [FromServices] Authenti
 
     // Return token
     return new { Token = tokenString };
+   }else {
+    return null;
+   }
 })
 .WithName("Login")
 .WithOpenApi();
@@ -207,14 +234,16 @@ app.MapGet("/getstudent",  (HttpContext context, AppDbContext dbContext ,int pag
 .WithName("getstudent")
 .WithOpenApi();
 
-
-app.UseAuthentication();
-app.UseAuthorization();
-app.Run();
-
-
-
-record AddStudent()
+app.MapGet("/getbyıdstudent/{studentId}",  (HttpContext context, AppDbContext dbContext , int studentId) =>
 {
-    
-}
+   var student=dbContext?.Students?.Find(studentId);
+   return student;
+})
+.WithName("getbyıdstudent")
+.WithOpenApi();
+
+
+
+
+app.UseCors("CorsPolicy");
+app.Run();

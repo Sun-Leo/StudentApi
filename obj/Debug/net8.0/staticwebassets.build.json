@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "V2zSGyg2muliH+r6WdccIbxaJP+91eICdFsx2WuJU0M=",
+  "Hash": "AT4Y0Tvk9qbwVF9f1Z4Vaap2LnAsBerPplLRYvKnSwM=",
   "Source": "StudentApi",
   "BasePath": "_content/StudentApi",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "StudentApi\\wwwroot",
       "Source": "StudentApi",
-      "ContentRoot": "C:\\Users\\Gizem\\Desktop\\vsstudent\\StudentApi\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\Gizem\\Desktop\\vsstudent\\StudentApi\\wwwroot\\",
       "BasePath": "_content/StudentApi",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Gizem\\Desktop\\vsstudent\\StudentApi\\wwwroot\\custom.css",
+      "Identity": "c:\\Users\\Gizem\\Desktop\\vsstudent\\StudentApi\\wwwroot\\custom.css",
       "SourceId": "StudentApi",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Gizem\\Desktop\\vsstudent\\StudentApi\\wwwroot\\",
+      "ContentRoot": "c:\\Users\\Gizem\\Desktop\\vsstudent\\StudentApi\\wwwroot\\",
       "BasePath": "_content/StudentApi",
       "RelativePath": "custom.css",
       "AssetKind": "All",
